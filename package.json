@@ -13,7 +13,7 @@
   },
   "scripts": {
     "format": "prettier --write .",
-    "test": "node src/main.js"
+    "test": "node src/main.test.js"
   },
   "devDependencies": {
     "prettier": "^2.7.1",
