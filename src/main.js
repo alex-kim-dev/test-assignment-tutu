@@ -32,5 +32,54 @@ const dscount = (string, char1, char2) =>
   [['aAa', 'a', 'a'], 2],
 ].forEach(([args, expected]) => {
   const actual = dscount.apply(null, args);
-  console.assert(actual === expected, `${args[0]} -> ${actual}`);
+  console.assert(actual === expected, `${args} -> ${actual}`);
+});
+
+// Task #2
+
+/**
+ * Checks the sequence of brackets for syntactic correctness
+ * @arg {string} string
+ * @return {0 | 1} ok | error
+ */
+const checkSyntax = (string) => {
+  const stack = [];
+  const openings = '<[{(';
+  const closings = '>]})';
+
+  const types = {
+    '<': 'angle',
+    '>': 'angle',
+    '[': 'square',
+    ']': 'square',
+    '{': 'curly',
+    '}': 'curly',
+    '(': 'round',
+    ')': 'round',
+  };
+
+  for (const char of string) {
+    if (openings.includes(char)) stack.push(types[char]);
+
+    if (closings.includes(char)) {
+      const last = stack.pop();
+      if (last !== types[char]) return 1;
+    }
+  }
+
+  return 0;
+};
+
+[
+  ['---(++++)----', 0],
+  ['', 0],
+  ['before ( middle []) after ', 0],
+  [') (', 1],
+  ['} {', 1],
+  ['<(   >)', 1],
+  ['(  [  <>  ()  ]  <>  )', 0],
+  ['   (      [)', 1],
+].forEach(([arg, expected]) => {
+  const actual = checkSyntax.call(null, arg);
+  console.assert(actual === expected, `${arg} -> ${actual}`);
 });
