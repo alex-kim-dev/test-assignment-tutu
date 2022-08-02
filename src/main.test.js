@@ -1,6 +1,12 @@
 // @ts-check
 
-const { dscount, checkSyntax, estimateCookingTime, lastIndex } = require('./main');
+const {
+  dscount,
+  checkSyntax,
+  estimateCookingTime,
+  lastIndex,
+  drawRating,
+} = require('./main');
 
 /**
  * @arg {string} testName
@@ -79,3 +85,17 @@ testEach([
   [['abcca', 'a'], 4],
   [['abcca', 'c', 'b', 'a'], 4],
 ])('last index', lastIndex);
+
+testEach([
+  [0, '★☆☆☆☆'],
+  [1, '★☆☆☆☆'],
+  [20, '★☆☆☆☆'],
+  [21, '★★☆☆☆'],
+  [40, '★★☆☆☆'],
+  [41, '★★★☆☆'],
+  [60, '★★★☆☆'],
+  [61, '★★★★☆'],
+  [80, '★★★★☆'],
+  [81, '★★★★★'],
+  [100, '★★★★★'],
+])('stars rating', drawRating);

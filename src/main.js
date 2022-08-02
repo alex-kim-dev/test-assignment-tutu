@@ -105,3 +105,12 @@ exports.lastIndex = (string, ...chars) => {
     ...filtered.map((char) => char[0]).map((char) => string.lastIndexOf(char))
   );
 };
+
+// Refactoring task #2
+
+/**
+ * @arg {number} vote, 0-100
+ * @return {string} a string with 1-5 stars
+ */
+exports.drawRating = (vote) =>
+  '★'.repeat(Math.ceil(vote / 20) || 1).padEnd(5, '☆');
