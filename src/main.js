@@ -114,3 +114,11 @@ exports.lastIndex = (string, ...chars) => {
  */
 exports.drawRating = (vote) =>
   '★'.repeat(Math.ceil(vote / 20) || 1).padEnd(5, '☆');
+
+// Practical task #1
+
+/**
+ * @arg {string | URL} url
+ * @return {URL}
+ */
+exports.parseUrl = (url) => new URL(url);

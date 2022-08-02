@@ -6,6 +6,7 @@ const {
   estimateCookingTime,
   lastIndex,
   drawRating,
+  parseUrl,
 } = require('./main');
 
 /**
@@ -99,3 +100,23 @@ testEach([
   [81, '★★★★★'],
   [100, '★★★★★'],
 ])('stars rating', drawRating);
+
+{
+  const url = parseUrl('http://tutu.ru:8080/do/any.php?a=1&b[]=a&b[]=b#foo');
+  const errors = [
+    ['href', 'http://tutu.ru:8080/do/any.php?a=1&b[]=a&b[]=b#foo'],
+    ['hash', '#foo'],
+    ['port', '8080'],
+    ['host', 'tutu.ru:8080'],
+    ['protocol', 'http:'],
+    ['hostname', 'tutu.ru'],
+    ['pathname', '/do/any.php'],
+    ['origin', 'http://tutu.ru:8080'],
+  ].reduce(
+    (acc, [prop, expected]) =>
+      url[prop] === expected ? acc : [...acc, `${prop} => ${url[prop]}`],
+    new Array()
+  );
+
+  log('url parsing', errors);
+}
