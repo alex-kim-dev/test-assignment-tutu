@@ -1,6 +1,6 @@
 // @ts-check
 
-const { dscount, checkSyntax } = require('./main');
+const { dscount, checkSyntax, estimateCookingTime } = require('./main');
 
 /**
  * @arg {string} testName
@@ -24,9 +24,7 @@ const testEach = (cases) => (testName, fn) => {
   const errors = cases.reduce((acc, [args, expected]) => {
     const callMethod = Array.isArray(args) ? 'apply' : 'call';
     const actual = fn[callMethod](null, args);
-    return actual === expected
-      ? acc
-      : [...acc, `${args} => ${actual}`];
+    return actual === expected ? acc : [...acc, `${args} => ${actual}`];
   }, new Array());
 
   log(testName, errors);
@@ -53,3 +51,16 @@ testEach([
   ['(  [  <>  ()  ]  <>  )', 0],
   ['   (      [)', 1],
 ])('bracket balancer', checkSyntax);
+
+testEach([
+  [-1, -1],
+  [0, 0],
+  [3, 4],
+  [4, 4],
+  [2, 2],
+  [1, 2],
+  [[3, 0], -1],
+  [[3, 3], 2],
+  [[1, 3], 2],
+  [[4, 3], 4],
+])('pancakes cooking', estimateCookingTime);

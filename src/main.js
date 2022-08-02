@@ -1,6 +1,6 @@
 // @ts-check
 
-// Task #1
+// Fizz-buzz task #1
 
 /**
  * Counts the number of consecutive characters in a string, O(n)
@@ -21,7 +21,7 @@ exports.dscount = (string, char1, char2) =>
       { prevMatch: false, count: 0 }
     ).count;
 
-// Task #2
+// Fizz-buzz task #2
 
 /**
  * Checks the sequence of brackets for syntactic correctness
@@ -54,4 +54,23 @@ exports.checkSyntax = (string) => {
   }
 
   return 0;
+};
+
+// Algorithms task
+
+/**
+ * @arg {number} pancakes, number of pancakes to cook
+ * @arg {number} pans, number of pans
+ * @return {number} minutes spend on cooking
+ */
+exports.estimateCookingTime = (pancakes, pans = 2) => {
+  if (
+    !Number.isFinite(pancakes) ||
+    !Number.isFinite(pans) ||
+    pancakes < 0 ||
+    pans < 1
+  )
+    return -1;
+  const pancakeSides = 2;
+  return Math.ceil(pancakes / pans) * pancakeSides;
 };
