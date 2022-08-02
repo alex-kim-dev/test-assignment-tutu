@@ -74,3 +74,34 @@ exports.estimateCookingTime = (pancakes, pans = 2) => {
   const pancakeSides = 2;
   return Math.ceil(pancakes / pans) * pancakeSides;
 };
+
+// Refactoring task #1
+
+/**
+ * What's improved:
+ * - naming
+ * - got rid of var
+ * - used appropriate methods
+ * - strict equality
+ * - fixed a bug: not returning 0 for the first char match
+ * - got rid of lots of nested ifs
+ * - got rid of mutations
+ * - formatting
+ * - added ability to pass multiple characters
+ * - tests
+ * - types
+ * @arg {string} string
+ * @arg {...string} chars, single characters
+ * @return {number} index or -1 if not found
+ */
+exports.lastIndex = (string, ...chars) => {
+  if (!string) return -1;
+
+  const filtered = chars.filter((char) => char !== '');
+
+  if (filtered.length === 0) return -1;
+
+  return Math.max(
+    ...filtered.map((char) => char[0]).map((char) => string.lastIndexOf(char))
+  );
+};

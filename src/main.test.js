@@ -1,6 +1,6 @@
 // @ts-check
 
-const { dscount, checkSyntax, estimateCookingTime } = require('./main');
+const { dscount, checkSyntax, estimateCookingTime, lastIndex } = require('./main');
 
 /**
  * @arg {string} testName
@@ -64,3 +64,18 @@ testEach([
   [[1, 3], 2],
   [[4, 3], 4],
 ])('pancakes cooking', estimateCookingTime);
+
+testEach([
+  [['', 'a', 'b'], -1],
+  [['abc', '', ''], -1],
+  [['abc', 'a', ''], 0],
+  [['abc', '', 'b'], 1],
+  [['abc', 'a', 'b'], 1],
+  [['abc', 'a', 'c'], 2],
+  [['abc', 'c', 'b'], 2],
+  [['abc', 'y', 'z'], -1],
+  [['abc', 'c', 'c'], 2],
+  [['abcca', 'a', 'c'], 4],
+  [['abcca', 'a'], 4],
+  [['abcca', 'c', 'b', 'a'], 4],
+])('last index', lastIndex);
