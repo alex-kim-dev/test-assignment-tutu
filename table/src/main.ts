@@ -1,7 +1,6 @@
 import 'water.css';
+import { getFilltextData } from './api/getFilltextData';
 
-document.querySelector<HTMLDivElement>(
-  '#app'
-)!.innerHTML = `<h1>Hello world!</h1>`;
-
-export {};
+const container = document.getElementById('container') as HTMLDivElement;
+const data = await getFilltextData();
+container.textContent = JSON.stringify(data, null, 2);
