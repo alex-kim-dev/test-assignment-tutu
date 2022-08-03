@@ -53,6 +53,8 @@ exports.checkSyntax = (string) => {
     }
   }
 
+  if (stack.length > 0) return 1;
+
   return 0;
 };
 
