@@ -1,0 +1,22 @@
+{
+  "name": "table",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Solution for the interactive table component task",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "water.css": "^2.1.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite": "^3.0.0"
+  }
+}

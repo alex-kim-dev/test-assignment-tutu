@@ -1,4 +1,6 @@
 /node_modules
 /tasks/node_modules
+/table/node_modules
 /package-lock.json
 /tasks/package-lock.json
+/table/package-lock.json

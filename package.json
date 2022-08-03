@@ -16,6 +16,7 @@
     "prettier-plugin-package": "^1.3.0"
   },
   "workspaces": [
-    "tasks"
+    "tasks",
+    "table"
   ]
 }
