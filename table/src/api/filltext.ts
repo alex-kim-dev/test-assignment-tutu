@@ -1,10 +1,10 @@
-interface User {
+export interface User {
   id: number;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
-  adress: {
+  address: {
     streetAddress: string;
     city: string;
     state: string;
@@ -20,26 +20,30 @@ const searchParams = new URLSearchParams({
   lastName: '{lastName}',
   email: '{email}',
   phone: '{phone|(xxx)xxx-xx-xx}',
-  adress: '{addressObject}',
+  address: '{addressObject}',
   description: '{lorem|32}',
 });
 
-const url = new URL('http://www.filltext.com');
-url.search = searchParams.toString();
+interface getFilltextUrlOptions {
+  datasetSize: 'small' | 'big';
+}
 
-export const getFilltextData = async (
-  amount: 'small' | 'large' = 'small'
-): Promise<User[]> => {
-  if (amount === 'large') {
+const defaultOptions: getFilltextUrlOptions = {
+  datasetSize: 'small',
+};
+
+export const getFilltextUrl = (
+  options?: Partial<getFilltextUrlOptions>
+): URL => {
+  const { datasetSize } = { ...defaultOptions, ...options };
+
+  const url = new URL('http://www.filltext.com');
+  url.search = searchParams.toString();
+
+  if (datasetSize === 'big') {
     url.searchParams.set('rows', '1000');
     url.searchParams.append('delay', '3');
   }
 
-  const response = await fetch(url);
-  const { ok, status, statusText } = response;
-
-  if (!ok)
-    throw new Error(`Failed to fetch the table data: ${status}, ${statusText}`);
-
-  return response.json();
+  return url;
 };
